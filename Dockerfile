@@ -1,3 +1,6 @@
+FROM node:14-alpine
+RUN apk add -U subversion
+
 FROM centos:latest
 # Update Apt and then install Nano editor (RUN can be removed)
 RUN yum -y update && yum -y upgrade
