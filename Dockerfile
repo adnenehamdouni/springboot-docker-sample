@@ -12,7 +12,7 @@ RUN cp -Rv /tmp/apache-tomcat-8.5.57/* /usr/local/tomcat/
 COPY conf/tomcat-users.xml /usr/local/tomcat/conf/
 COPY conf/context.xml /usr/local/tomcat/webapps/manager/META-INF/
 
-ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
+ADD /webapps/spring-boot-web.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
