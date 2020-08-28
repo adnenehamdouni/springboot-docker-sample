@@ -54,6 +54,7 @@ RUN cp -Rv /tmp/apache-tomcat-8.5.57/* /usr/local/tomcat/
 COPY conf/tomcat-users.xml /usr/local/tomcat/conf/
 COPY conf/context.xml /usr/local/tomcat/webapps/manager/META-INF/
 
+RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 CMD ["mvn","clean install"]
 # ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
