@@ -37,16 +37,6 @@ pipeline {
                 }
             }
 
-            stage('Package') {
-
-                steps {
-                    echo 'Packaging..'
-                    sh 'mvn clean package'
-
-                }
-            }
-
-
         }
 
 }
