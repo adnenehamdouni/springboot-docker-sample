@@ -14,11 +14,11 @@ services:
     ports:
         - "8889:8080"
         - "8446:8443"
-    #volumes:
+    volumes:
         #- "./data/tomcat-data:/usr/local/tomcat"
 
       #- ./data/tomcat-data/conf:/usr/local/tomcat/conf/
-      #- ./data/tomcat-data/webapps:/usr/local/tomcat/webapps/
+        - ./data/tomcat-data/webapps:/usr/local/tomcat/webapps/
       #- ./data/tomcat-data/logs:/usr/local/tomcat/logs
     
 volumes:
