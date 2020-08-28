@@ -6,13 +6,6 @@ pipeline {
         }
         stages {
 
-            stage("Fix the permission issue") {
-                agent any
-                steps {
-                    sh "sudo chown root:jenkins /run/docker.sock"
-                }
-            }
-
             stage('Build') {
                 steps {
                     sh 'mvn --version'
@@ -23,8 +16,6 @@ pipeline {
                 steps {
                     echo 'Cleaning..'
                     sh 'mvn clean install'
-                    sh "cp /var/jenkins_home/workspace/springboot-docker-sample-dockerfile/target/spring-boot-web.war /usr/local/tomcat/webapps/"
-
                 }
             }
             stage('docker-compose') {
