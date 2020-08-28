@@ -1,10 +1,5 @@
 pipeline {
-        agent { dockerfile true
-            docker {
-                    image 'maven:3-alpine'
-                    args '-v $HOME/.m2:/root/.m2'
-                }
-        }
+        agent { dockerfile true }
         tools {
                 //jdk 'jdk8'
                 maven 'maven3'
