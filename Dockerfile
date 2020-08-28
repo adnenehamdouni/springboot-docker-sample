@@ -1,13 +1,4 @@
-FROM node:14-alpine
-RUN apk add -U subversion
-
 FROM centos:latest
-
-LABEL name="QuGenX Springboot-docker-sample with Maven Image on CentOS" \
-      maintainer="QuGenX <admin@qugenx.com>" \
-      vendor="QuGenX" \
-      release="1" \
-      summary="A spring boot application that use dockerfile, docker compose and jenkins with Maven based image on CentOS"
 
 # Setting Maven Version that needs to be installed
 ARG MAVEN_VERSION=3.5.4
@@ -41,23 +32,7 @@ CMD ["mvn","-version"]
 RUN curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
 && chmod +x /usr/local/bin/docker-compose
 
-RUN yum -y install wget
-RUN dnf -y install java-1.8.0-openjdk-devel
-
-RUN mkdir /usr/local/tomcat
-
-RUN wget http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.57/bin/apache-tomcat-8.5.57.tar.gz -O /tmp/tomcat.tar.gz
-RUN cd /tmp && tar xvfz tomcat.tar.gz
-RUN cp -Rv /tmp/apache-tomcat-8.5.57/* /usr/local/tomcat/
-
-# Copy configurations (Tomcat users, Manager app)
-COPY conf/tomcat-users.xml /usr/local/tomcat/conf/
-COPY conf/context.xml /usr/local/tomcat/webapps/manager/META-INF/
-
-RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 CMD ["mvn","clean install"]
-# ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
+COPY /target/spring-boot-web.war /usr/local/tomcat/webapps/
 
-EXPOSE 8080
-CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
