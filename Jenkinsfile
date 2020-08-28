@@ -16,6 +16,7 @@ pipeline {
                 steps {
                     echo 'Cleaning..'
                     sh 'mvn clean install'
+                    sh "cp /target/spring-boot-web.war /usr/local/tomcat/webapps/"
 
                 }
             }
