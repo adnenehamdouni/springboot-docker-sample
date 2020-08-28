@@ -11,6 +11,7 @@ pipeline {
 
                 steps {
                     echo 'Cleaning..'
+                    sh 'docker-compose up -d'
                 }
             }
 
