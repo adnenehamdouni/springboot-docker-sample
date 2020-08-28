@@ -1,0 +1,65 @@
+#!/usr/bin/env groovy
+
+// Use node dedicated to Java compilation
+pipeline {
+    agent any
+
+    tools {
+        //jdk 'jdk8'
+        maven 'maven3'
+    }
+    stages {
+        // Clean workspace
+
+        stage('test java installation') {
+            steps {
+                echo 'Checking Java Version..'
+                sh 'java -version'
+                sh 'which java'
+            }
+        }
+        stage('test maven installation') {
+            steps {
+                echo 'Checking Maven Version..'
+                sh 'mvn -version'
+                sh 'which mvn'
+            }
+        }
+        stage('Clean workspace') {
+            steps {
+                println("deleteDir")
+                deleteDir()
+            }
+
+        }
+        // Download source code
+        stage('Preparation') {
+            steps {
+                println("checkout scm")
+                checkout scm
+            }
+        }
+
+        // Launch Maven
+
+        stage('Build') {
+
+            steps {
+                mavenTask("clean install deploy")
+
+                // Tell Mailer that it's a success
+            }
+        }
+
+    }
+
+}
+
+def mavenTask(String command) {
+    def rootDir = pwd()
+    def common = load "${rootDir}/jenkinsfile-common"
+    println("Running Build")
+    common.mavenTask(command)
+}
+
+

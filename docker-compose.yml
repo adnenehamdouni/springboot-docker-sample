@@ -1,0 +1,31 @@
+version: "3.7"
+
+### SERVICES SETTINGS ###
+services:
+  ###  TOMCAT ###
+  tomcat-service:
+    restart: always
+    container_name: spring-boot-docker-sample
+    #image: tomcat:8.5-jre8
+    build:
+        context: . # Use an image built from the specified dockerfile in the `tomcat` directory.
+        dockerfile: Dockerfile
+        network: host
+    ports:
+        - "8889:8080"
+        - "8446:8443"
+    #volumes:
+        #- "./data/tomcat-data:/usr/local/tomcat"
+
+      #- ./data/tomcat-data/conf:/usr/local/tomcat/conf/
+      #- ./data/tomcat-data/webapps:/usr/local/tomcat/webapps/
+      #- ./data/tomcat-data/logs:/usr/local/tomcat/logs
+    
+volumes:
+    mysql-data:
+    tomcat-data:
+    webapps:
+
+#networks: 
+    #dockernet1: 
+      #driver: bridge

@@ -1,0 +1,18 @@
+#!/usr/bin/env groovy
+
+def mavenTask(String command) {
+    def MAVEN_BUILD=tool 'maven3'
+    def NODE_HOME=tool 'node'
+
+    if (isUnix()) {
+        println("Running with command: " + command)
+        sh "'${MAVEN_BUILD}/bin/mvn' -e -U -B -X  ${command}"
+    } else {
+        withEnv(["JAVA_HOME=${JAVA_HOME}",
+                 "PATH=${NODE_HOME};${env.PATH};${WORKSPACE}/spring-boot-angular-jenkins-web/node-modules/.bin"]) {
+            bat (/"${MAVEN_BUILD}\bin\mvn.bat" -e -U -B ${command}/)
+        }
+    }
+}
+
+return this

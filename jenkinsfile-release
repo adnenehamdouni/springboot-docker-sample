@@ -1,0 +1,35 @@
+#!/usr/bin/env groovy
+
+// Use node dedicated to Java compilation
+node('master') {
+
+    def mailRecipients = 'adnene.hamdouni@gmail.com,adnene.hamdouni@qugenx.com'
+
+    try {
+
+        // Clean workspace
+        stage('Clean workspace') {
+            deleteDir()
+        }
+        // Download source code
+        stage('Preparation') {
+          checkout scm
+        }
+
+        // Launch Maven
+        stage('Build') {
+            def common = load("${pwd()}/jenkinsfile-common")
+            common.mavenTask("clean ")
+
+            // Tell Mailer that it's a success
+            currentBuild.result = 'SUCCESS'
+        }
+    } catch(e) {
+        // Tell Mailer that something went wrong
+        currentBuild.result = 'FAILURE'
+        throw e
+    } finally {
+        // Send mail if task broke or is repaired
+        step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: mailRecipients, sendToIndividuals: true])
+    }
+}
