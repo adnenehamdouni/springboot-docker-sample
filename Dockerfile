@@ -56,7 +56,7 @@ COPY conf/context.xml /usr/local/tomcat/webapps/manager/META-INF/
 
 
 CMD ["mvn","clean install"]
-ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
+# ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
