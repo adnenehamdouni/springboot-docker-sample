@@ -11,11 +11,19 @@ pipeline {
 
                 steps {
                     echo 'Cleaning..'
-                    sh 'docker-compose up -d'
                 }
             }
-
-
-        }
+            stage('docker-compose') {
+               steps {
+                  sh "docker-compose build"
+                  sh "docker-compose up -d"
+               }
+           }
+               }
+           post {
+              always {
+                 sh "docker-compose down || true"
+              }
+           }
 
 }
