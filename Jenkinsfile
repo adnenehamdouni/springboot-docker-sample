@@ -16,7 +16,7 @@ pipeline {
                 steps {
                     echo 'Cleaning..'
                     sh 'mvn clean install'
-                    sh "cp /var/jenkins_home/workspace/springboot-docker-sample-dockerfile/target/spring-boot-web.war /usr/local/tomcat/webapps/"
+                    sh "sudo cp /var/jenkins_home/workspace/springboot-docker-sample-dockerfile/target/spring-boot-web.war /usr/local/tomcat/webapps/"
 
                 }
             }
