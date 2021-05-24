@@ -90,9 +90,11 @@ node('master') {
     } catch(e) {
         // Tell Mailer that something went wrong
         currentBuild.result = 'FAILURE'
-        throw e
-    } finally {
         // Send mail if task broke or is repaired
         step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: mailRecipients, sendToIndividuals: true])
+    
+        throw e
+    } finally {
+        echo 'finally...'
     }
 }
