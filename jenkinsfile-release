@@ -16,6 +16,53 @@ node('master') {
           checkout scm
         }
 
+        //
+        stage('Clean') {
+
+            steps {
+                    retry(3) {
+                        echo 'Cleaning..'
+                    }
+                }
+            }
+
+        stage('Test') {
+
+            steps {
+                echo 'Testing..'
+                sh 'mvn clean test'
+
+            }
+        }
+
+        // Launch Maven Build
+        stage('Build') {
+
+            steps {
+                mavenTask("clean install")
+
+                // Tell Mailer that it's a success
+            }
+        }
+
+        // Launch Maven Package
+        stage('Package') {
+
+            steps {
+                timeout(time: 1, unit: 'MINUTES') {
+                    echo 'Packaging..'
+                sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // deploy here
+                echo 'Deploying App Here..'
+            }
+        }
+
         // Launch Maven
         stage('Build') {
             def common = load("${pwd()}/jenkinsfile-common")
