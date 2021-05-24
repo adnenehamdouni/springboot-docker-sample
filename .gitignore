@@ -120,6 +120,9 @@ Desktop.ini
 .gradle
 /build/
 
+.vscode
+.vscode/
+
 ### Maven ###
 /.mvn/
 /mvnw

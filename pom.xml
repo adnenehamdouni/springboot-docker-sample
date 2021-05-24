@@ -141,7 +141,8 @@
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
                         <!-- any version of Groovy \>= 1.5.0 should work here -->
-                        <version>2.4.8</version>
+                        <version>3.0.8</version>
+                        <type>pom</type>
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>
@@ -193,7 +194,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
+                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <id>unpack</id>
