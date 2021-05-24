@@ -79,6 +79,13 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                // deploy here
+                echo 'Deploying App Here..'
+            }
+        }
+
     }
 
     post {
