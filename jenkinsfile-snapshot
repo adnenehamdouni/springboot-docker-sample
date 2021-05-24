@@ -40,14 +40,39 @@ pipeline {
             }
         }
 
-        // Launch Maven
+        stage('Clean') {
 
+            steps {
+                    echo 'Cleaning..'
+                }
+            }
+
+        stage('Test') {
+
+            steps {
+                echo 'Testing..'
+                sh 'mvn clean test'
+
+            }
+        }
+
+        // Launch Maven Build
         stage('Build') {
 
             steps {
-                mavenTask("clean install deploy")
+                mavenTask("clean install")
 
                 // Tell Mailer that it's a success
+            }
+        }
+
+        // Launch Maven Package
+        stage('Package') {
+
+            steps {
+                echo 'Packaging..'
+                sh 'mvn clean package'
+
             }
         }
 
