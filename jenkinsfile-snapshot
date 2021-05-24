@@ -69,7 +69,7 @@ pipeline {
         }
 
         // Launch Maven Package
-        stage('Package') {s
+        stage('Package') {
 
             steps {
                 timeout(time: 1, unit: 'MINUTES') {
@@ -82,7 +82,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying App Here..'
-            }s
+            }
         }
 
         stage('Docker Build') {
