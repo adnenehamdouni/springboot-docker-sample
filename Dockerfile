@@ -14,5 +14,5 @@ COPY conf/context.xml /usr/local/tomcat/webapps/manager/META-INF/
 
 ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
 
-EXPOSE 8080
+EXPOSE 8087
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
