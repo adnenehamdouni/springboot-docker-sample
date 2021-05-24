@@ -3,6 +3,7 @@
 // Use node dedicated to Java compilation
 node('master') {
 
+    def common = load("${pwd()}/jenkinsfile-common")
     def mailRecipients = 'adnene.hamdouni@gmail.com,adnene.hamdouni@qugenx.com'
     def app
     try {
@@ -16,6 +17,14 @@ node('master') {
           checkout scm
         }
 
+        // Launch Maven
+        stage('Init Build') {
+            common.mavenTask("clean ")
+
+            // Tell Mailer that it's a success
+            currentBuild.result = 'SUCCESS'
+        }
+
         //
         stage('Clean') {
             retry(3) {
@@ -25,12 +34,12 @@ node('master') {
 
         stage('Test') {     
             echo 'Testing..'
-            sh 'mvn clean test' 
+            common.mavenTask("clean test")
         }
 
         // Launch Maven Build
         stage('Build') {
-            mavenTask("clean install")
+            common.mavenTask("clean install")
             // Tell Mailer that it's a success
         }
 
@@ -38,7 +47,7 @@ node('master') {
         stage('Package') {
             timeout(time: 1, unit: 'MINUTES') {
                 echo 'Packaging..'
-                sh 'mvn clean package'
+                common.mavenTask("clean package")
             }
         }
 
@@ -47,14 +56,6 @@ node('master') {
             echo 'Deploying App Here..'
         }
 
-        // Launch Maven
-        stage('Build') {
-            def common = load("${pwd()}/jenkinsfile-common")
-            common.mavenTask("clean ")
-
-            // Tell Mailer that it's a success
-            currentBuild.result = 'SUCCESS'
-        }
 
         stage('Build image') {
             /* This builds the actual image; synonymous to
