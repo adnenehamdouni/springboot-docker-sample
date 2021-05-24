@@ -12,7 +12,7 @@ RUN cp -Rv /tmp/apache-tomcat-8.5.66/* /usr/local/tomcat/
 COPY conf/tomcat-users.xml /usr/local/tomcat/conf/
 COPY conf/context.xml /usr/local/tomcat/webapps/manager/META-INF/
 
-ADD /var/lib/docker/volumes/jenkins-data/_data/workspace/springboot-docker-sample-develop-release/target/spring-boot-web.war /usr/local/tomcat/webapps/
+ADD /var/jenkins_home/workspace/springboot-docker-sample-develop-release/target/spring-boot-web.war /usr/local/tomcat/webapps/
 
 EXPOSE 8087
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
