@@ -69,11 +69,11 @@ pipeline {
         }
 
         // Launch Maven Package
-        stage('Package') {
+        stage('Package') {s
 
             steps {
                 timeout(time: 1, unit: 'MINUTES') {
-                    echo 'Packaging..'
+                    echo 'Packaging..'s
                     sh 'mvn clean package'
                 }
             }
@@ -82,12 +82,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying App Here..'
-            }
+            }s
         }
 
         stage('Docker Build') {
             agent any
             steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh './deploy.sh'
                 //sh 'docker build -f Dockerfile -t springboot-docker-sample .'
             }
