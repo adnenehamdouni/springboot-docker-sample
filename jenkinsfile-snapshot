@@ -73,7 +73,7 @@ pipeline {
 
             steps {
                 timeout(time: 1, unit: 'MINUTES') {
-                    echo 'Packaging..'s
+                    echo 'Packaging..'
                     sh 'mvn clean package'
                 }
             }
