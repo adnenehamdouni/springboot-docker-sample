@@ -82,15 +82,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying App Here..'
+                sh 'mvn clean deploy -Dmaven.test.skip=true'
             }
         }
 
         stage('Docker Build') {
             agent any
             steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
+                echo 'Docker build and run App Here..'
+                //sh "chmod +x -R ${env.WORKSPACE}"
                 //sh './deploy.sh'
-                sh 'docker build -f Dockerfile -t springboot-docker-sample .'
+                //sh 'docker build -f Dockerfile -t springboot-docker-sample .'
             }
         }
 

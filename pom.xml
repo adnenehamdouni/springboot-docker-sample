@@ -23,12 +23,20 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <java.version>1.8</java.version>
+        <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
 
         <!--set this to your docker acct name-->
         <docker.image.prefix>adnenehamdouni</docker.image.prefix>
         <!--Set to name of project-->
         <docker.image.name>springdocker</docker.image.name>
     </properties>
+
+    <distributionManagement>
+        <snapshotRepository>
+           <id>nexus-snapshots</id>
+           <url>https://nexus.qugenx.com/repository/snapshots/</url>
+        </snapshotRepository>
+     </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -216,6 +224,47 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--<plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <executions>
+                   <execution>
+                      <id>default-deploy</id>
+                      <phase>deploy</phase>
+                      <goals>
+                         <goal>deploy</goal>
+                      </goals>
+                   </execution>
+                </executions>
+             </plugin>-->
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                   <skip>true</skip>
+                </configuration>
+             </plugin>
+             <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                   <execution>
+                      <id>default-deploy</id>
+                      <phase>deploy</phase>
+                      <goals>
+                         <goal>deploy</goal>
+                      </goals>
+                   </execution>
+                </executions>
+                <configuration>
+                   <serverId>nexus</serverId>
+                   <nexusUrl>https://nexus.qugenx.com/</nexusUrl>
+                   <skipStaging>true</skipStaging>
+                </configuration>
+             </plugin>
             <!-- end::unpack[] -->
         </plugins>
     </build>
