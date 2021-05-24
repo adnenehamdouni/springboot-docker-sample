@@ -18,49 +18,33 @@ node('master') {
 
         //
         stage('Clean') {
+            retry(3) {
+                echo 'Cleaning..'
+            } 
+        }
 
-            steps {
-                    retry(3) {
-                        echo 'Cleaning..'
-                    }
-                }
-            }
-
-        stage('Test') {
-
-            steps {
-                echo 'Testing..'
-                sh 'mvn clean test'
-
-            }
+        stage('Test') {     
+            echo 'Testing..'
+            sh 'mvn clean test' 
         }
 
         // Launch Maven Build
         stage('Build') {
-
-            steps {
-                mavenTask("clean install")
-
-                // Tell Mailer that it's a success
-            }
+            mavenTask("clean install")
+            // Tell Mailer that it's a success
         }
 
         // Launch Maven Package
         stage('Package') {
-
-            steps {
-                timeout(time: 1, unit: 'MINUTES') {
-                    echo 'Packaging..'
+            timeout(time: 1, unit: 'MINUTES') {
+                echo 'Packaging..'
                 sh 'mvn clean package'
-                }
             }
         }
 
         stage('Deploy') {
-            steps {
-                // deploy here
-                echo 'Deploying App Here..'
-            }
+            // deploy here
+            echo 'Deploying App Here..'
         }
 
         // Launch Maven
