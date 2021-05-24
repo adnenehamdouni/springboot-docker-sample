@@ -29,7 +29,7 @@ node('master') {
             /* This builds the actual image; synonymous to
             * docker build on the command line */
 
-            app = docker.build("adnenehamdouni/springbootJenkinsDocker")
+            app = docker.build("adnenehamdouni/springboot-docker-sample")
         }
 
         stage('Test image') {
