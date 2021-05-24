@@ -3,7 +3,6 @@
 // Use node dedicated to Java compilation
 node('master') {
 
-    def common = load("${pwd()}/jenkinsfile-common")
     def mailRecipients = 'adnene.hamdouni@gmail.com,adnene.hamdouni@qugenx.com'
     def app
     try {
@@ -19,6 +18,7 @@ node('master') {
 
         // Launch Maven
         stage('Init Build') {
+            def common = load("${pwd()}/jenkinsfile-common")
             common.mavenTask("clean ")
 
             // Tell Mailer that it's a success
@@ -34,11 +34,13 @@ node('master') {
 
         stage('Test') {     
             echo 'Testing..'
+            def common = load("${pwd()}/jenkinsfile-common")
             common.mavenTask("clean test")
         }
 
         // Launch Maven Build
         stage('Build') {
+            def common = load("${pwd()}/jenkinsfile-common")
             common.mavenTask("clean install")
             // Tell Mailer that it's a success
         }
@@ -47,6 +49,7 @@ node('master') {
         stage('Package') {
             timeout(time: 1, unit: 'MINUTES') {
                 echo 'Packaging..'
+            def common = load("${pwd()}/jenkinsfile-common")
                 common.mavenTask("clean package")
             }
         }
