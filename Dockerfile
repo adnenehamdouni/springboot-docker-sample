@@ -59,5 +59,5 @@ RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 CMD ["mvn","clean install"]
 # ADD /target/spring-boot-web.war /usr/local/tomcat/webapps/
 
-EXPOSE 8080
+EXPOSE 8086
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
