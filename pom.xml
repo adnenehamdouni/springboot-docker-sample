@@ -33,7 +33,7 @@
 
     <distributionManagement>
         <snapshotRepository>
-           <id>nexus-snapshots</id>
+           <id>qugenx-snapshots</id>
            <url>https://nexus.qugenx.com/repository/snapshots/</url>
         </snapshotRepository>
      </distributionManagement>
