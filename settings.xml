@@ -1,7 +1,7 @@
 <servers>
     <server>
        <id>qugenx-snapshots</id>
-       <username>admin</username>
-       <password>AdmNexus@2018</password>
+       <username>deployment</username>
+       <password>deployment123</password>
     </server>
  </servers>
