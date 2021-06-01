@@ -1,6 +1,7 @@
 # springboot-docker-sample
 
 
+docker-compose build
+docker-compose up -d
 
-ADD tomcat-users.xml /usr/local/tomcat/conf/
-ADD context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
+http://localhost:8889/spring-boot-web/
