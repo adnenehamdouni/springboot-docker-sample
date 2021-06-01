@@ -91,6 +91,7 @@ pipeline {
             steps {
                 echo 'Docker build and run App Here..'
                 sh "chmod +x -R ${env.WORKSPACE}"
+                //docker.build('mobycounter')
                 //sh './deploy.sh'
                 //sh 'docker build -f Dockerfile -t springboot-docker-sample .'
                 //sh "docker kill spring-boot-docker-sample > /dev/null 2>&1"

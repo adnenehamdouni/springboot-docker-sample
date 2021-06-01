@@ -58,12 +58,6 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
@@ -110,7 +104,16 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <packagingExcludes>
+                        **/mycv/
+                    </packagingExcludes>
+                </configuration>
+            </plugin>
             <!-- tag::plugin[] -->
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -121,11 +124,6 @@
                 </configuration>
             </plugin>
             <!-- end::plugin[] -->
-
-
-
-
-
             <!-- tag::To Generate DockerFile from Template[]  -->
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
@@ -159,7 +157,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.20.0</version>
+                <version>0.36.0</version>
 
                 <configuration>
 
