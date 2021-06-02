@@ -264,6 +264,27 @@
                 </configuration>
              </plugin>
             <!-- end::unpack[] -->
+
+            <!--docker compose -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>Build Containers</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs>build</commandlineArgs>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
