@@ -72,7 +72,7 @@ pipeline {
         stage('Package') {
 
             steps {
-                timeout(time: 1, unit: 'MINUTES') {
+                timeout(time: 2, unit: 'MINUTES') {
                     echo 'Packaging..'
                     sh 'mvn clean package'
                 }
